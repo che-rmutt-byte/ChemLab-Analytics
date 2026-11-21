@@ -54,42 +54,42 @@
     ====================================================================== -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-20 gap-4">
                 <!-- โลโก้และชื่อศูนย์แล็บ -->
-                <a href="#home" class="flex items-center gap-3 group">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-navy-900 to-mint-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                <a href="#home" class="flex items-center gap-3 group shrink-0">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-navy-900 to-mint-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6m-5 0v5.5L5.2 17.6A2 2 0 007 20.5h10a2 2 0 001.8-2.9L14 8.5V3" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.5h9" />
                         </svg>
                     </div>
-                    <div>
-                        <span class="block font-heading font-bold text-xl text-navy-900 leading-tight tracking-tight">ChemLab <span class="text-mint-600">Analytics</span></span>
-                        <span class="block text-xs text-slate-500 font-medium">ศูนย์บริการวิเคราะห์ทดสอบทางเคมี</span>
+                    <div class="whitespace-nowrap">
+                        <span class="block font-heading font-bold text-lg sm:text-xl text-navy-900 leading-tight tracking-tight">ChemLab <span class="text-mint-600">Analytics</span></span>
+                        <span class="block text-[11px] sm:text-xs text-slate-500 font-medium">ศูนย์บริการวิเคราะห์ทดสอบทางเคมี</span>
                     </div>
                 </a>
 
-                <!-- เมนูสำหรับหน้าจอขนาดกลางขึ้นไป (Desktop Menu) -->
-                <nav class="hidden md:flex items-center gap-5 lg:gap-6">
-                    <a href="#home" class="text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">หน้าแรก</a>
-                    <a href="#instruments" class="text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">เครื่องมือและบทความ</a>
-                    <a href="#pricing" class="text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">อัตราค่าบริการ</a>
-                    <a href="#workflow" class="text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">ขั้นตอนการส่งตรวจ</a>
-                    <a href="#history-section" class="inline-flex items-center gap-1.5 text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">
+                <!-- เมนูสำหรับหน้าจอขนาดใหญ่ (Desktop Menu) -->
+                <nav class="hidden xl:flex items-center gap-4 2xl:gap-5">
+                    <a href="#home" class="whitespace-nowrap text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">หน้าแรก</a>
+                    <a href="#instruments" class="whitespace-nowrap text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">เครื่องมือและบทความ</a>
+                    <a href="#pricing" class="whitespace-nowrap text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">อัตราค่าบริการ</a>
+                    <a href="#workflow" class="whitespace-nowrap text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">ขั้นตอนการส่งตรวจ</a>
+                    <a href="#history-section" class="whitespace-nowrap inline-flex items-center gap-1.5 text-sm font-heading font-medium text-slate-600 hover:text-mint-600 transition-colors">
                         ประวัติคำขอทดสอบ
                         <span id="nav-history-badge" class="hidden px-2 py-0.5 rounded-full bg-mint-100 text-mint-700 text-xs font-bold">0</span>
                     </a>
-                    <button type="button" onclick="openRequestModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-heading font-medium text-sm shadow-md shadow-mint-600/20 transition-all hover:-translate-y-0.5">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <button type="button" onclick="openRequestModal()" class="whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-heading font-medium text-sm shadow-md shadow-mint-600/20 transition-all hover:-translate-y-0.5">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         ขอรับบริการทดสอบ
                     </button>
 
                     <!-- ส่วนแสดงสถานะการเข้าสู่ระบบมุมขวาบน (Desktop) -->
-                    <div id="nav-auth-desktop" class="flex items-center gap-2 pl-2 border-l border-slate-200">
-                        <button type="button" onclick="openAuthModal('login')" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-heading font-medium text-sm shadow-sm transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <div id="nav-auth-desktop" class="flex items-center gap-2 pl-3 border-l border-slate-200 shrink-0">
+                        <button type="button" onclick="openAuthModal('login')" class="whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-heading font-medium text-sm shadow-sm transition-colors">
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                             </svg>
                             เข้าสู่ระบบ
@@ -97,8 +97,8 @@
                     </div>
                 </nav>
 
-                <!-- ปุ่มเมนูแฮมเบอร์เกอร์สำหรับมือถือ (Mobile Menu Button) -->
-                <button id="mobile-menu-btn" type="button" aria-label="เปิดเมนูนำทาง" class="md:hidden p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-mint-500">
+                <!-- ปุ่มเมนูแฮมเบอร์เกอร์สำหรับมือถือและจอเล็ก (Mobile / Tablet Menu Button) -->
+                <button id="mobile-menu-btn" type="button" aria-label="เปิดเมนูนำทาง" class="xl:hidden p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-mint-500 shrink-0">
                     <svg id="icon-hamburger" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -110,7 +110,7 @@
         </div>
 
         <!-- เมนูแบบเลื่อนลงสำหรับมือถือ (Mobile Navigation Dropdown) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-5 space-y-2 shadow-lg">
+        <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-5 space-y-2 shadow-lg">
             <a href="#home" class="mobile-link block px-4 py-3 rounded-xl font-heading text-base font-medium text-slate-700 hover:bg-mint-50 hover:text-mint-700">หน้าแรก</a>
             <a href="#instruments" class="mobile-link block px-4 py-3 rounded-xl font-heading text-base font-medium text-slate-700 hover:bg-mint-50 hover:text-mint-700">เครื่องมือและบทความ</a>
             <a href="#pricing" class="mobile-link block px-4 py-3 rounded-xl font-heading text-base font-medium text-slate-700 hover:bg-mint-50 hover:text-mint-700">อัตราค่าบริการ</a>
@@ -953,7 +953,7 @@
                     </div>
 
                     <!-- สถานะ (Status) 5 ตัวเลือก -->
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div id="status-radio-group" class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
                         <label class="block text-sm font-medium text-slate-700 mb-3">สถานะ (Status) <span class="text-rose-500">*</span></label>
                         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                             <label class="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-mint-400 has-[:checked]:border-mint-600 has-[:checked]:bg-mint-50">
@@ -1082,7 +1082,7 @@
                         </div>
 
                         <!-- 3.4 การรับเอกสารต่าง ๆ -->
-                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                        <div id="doc-delivery-group" class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
                             <label class="block text-sm font-medium text-slate-700 mb-3">การรับเอกสารต่าง ๆ (Document collection/delivery) <span class="text-rose-500">*</span></label>
                             <div class="flex flex-wrap gap-4">
                                 <label class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-mint-400 has-[:checked]:border-mint-600 has-[:checked]:bg-mint-50">
@@ -1151,7 +1151,7 @@
 
                     <!-- การรับคืน (Sample disposition) & ความเป็นอันตราย (Hazardous of sample) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                        <div id="sample-disposition-group" class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
                             <label class="block text-sm font-medium text-slate-700 mb-3">การรับคืน (Sample disposition) <span class="text-rose-500">*</span></label>
                             <div class="flex flex-wrap gap-3">
                                 <label class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-mint-400 has-[:checked]:border-mint-600 has-[:checked]:bg-mint-50">
@@ -1402,9 +1402,12 @@
                 </div>
 
                 <div>
-                    <label for="upload-result-file" class="block text-sm font-medium text-slate-700 mb-1.5">อัปโหลดไฟล์ผลวิเคราะห์ขึ้น Google Drive (PDF, Excel, CSV, รูปภาพ สูงสุด 5MB)</label>
-                    <input type="file" id="upload-result-file" accept=".pdf,.xlsx,.xls,.csv,.txt,.png,.jpg,.jpeg,.doc,.docx"
+                    <label for="upload-result-file" class="block text-sm font-medium text-slate-700 mb-1.5">
+                        อัปโหลดไฟล์ผลวิเคราะห์ขึ้น Google Drive <span class="text-mint-700 font-semibold">(เลือกได้หลายไฟล์พร้อมกัน / หลากหลายชนิดไฟล์ สูงสุดไฟล์ละ 5MB)</span>
+                    </label>
+                    <input type="file" id="upload-result-file" multiple onchange="renderSelectedUploadFiles()"
                         class="w-full text-sm text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-heading file:font-semibold file:bg-mint-50 file:text-mint-700 hover:file:bg-mint-100 border border-slate-200 rounded-xl p-2">
+                    <div id="selected-upload-files-list" class="mt-2 space-y-1 text-xs text-slate-600 hidden"></div>
                     <p id="current-attached-file-info" class="text-xs text-mint-700 mt-1.5 hidden"></p>
                 </div>
 
@@ -2134,7 +2137,7 @@
                 // 1. ตรวจสอบเครื่องมือและรายการย่อย
                 const instrument = document.querySelector('input[name="instrument"]:checked')?.value || '';
                 if (!instrument) {
-                    return showFormError('กรุณาเลือกเครื่องมือหลักที่ต้องการทดสอบ (BET, CHNS, FTIR หรือ TGA)');
+                    return showFormError('กรุณาเลือกเครื่องมือหลักที่ต้องการทดสอบ (BET, CHNS, FTIR หรือ TGA)', document.getElementById('instrument-radio-group'));
                 }
 
                 const checkedSubItems = Array.from(document.querySelectorAll('input[name="subTestItems"]:checked')).map(cb => {
@@ -2146,89 +2149,108 @@
                 });
 
                 if (checkedSubItems.length === 0) {
-                    return showFormError(`กรุณาติ๊กเลือกรายการทดสอบย่อยของเครื่อง ${instrument} อย่างน้อย 1 รายการ`);
+                    return showFormError(`กรุณาติ๊กเลือกรายการทดสอบย่อยของเครื่อง ${instrument} อย่างน้อย 1 รายการ`, document.getElementById('sub-test-items-container'));
                 }
 
                 if (document.getElementById('ftir-wavelength-chk')?.checked) {
-                    const wlVal = document.getElementById('ftir-wavelength-input')?.value.trim();
-                    if (!wlVal) {
-                        return showFormError('กรุณาระบุค่าความยาวคลื่น (Wavelength) สำหรับเครื่อง FTIR');
+                    const wlInput = document.getElementById('ftir-wavelength-input');
+                    if (!wlInput?.value.trim()) {
+                        return showFormError('กรุณาระบุค่าความยาวคลื่น (Wavelength) สำหรับเครื่อง FTIR', wlInput);
                     }
                 }
 
                 // 2. ข้อมูลผู้ขอรับบริการและสถานะ
-                const fullName = document.getElementById('fullName').value.trim();
-                const organization = document.getElementById('organization').value.trim();
-                const phone = document.getElementById('phone').value.trim();
-                const email = document.getElementById('email').value.trim();
+                const fullNameEl = document.getElementById('fullName');
+                const organizationEl = document.getElementById('organization');
+                const phoneEl = document.getElementById('phone');
+                const emailEl = document.getElementById('email');
+
+                const fullName = fullNameEl.value.trim();
+                const organization = organizationEl.value.trim();
+                const phone = phoneEl.value.trim();
+                const email = emailEl.value.trim();
                 const ccEmail = document.getElementById('ccEmail').value.trim();
                 const researchGrant = document.getElementById('researchGrant').value.trim();
                 const status = document.querySelector('input[name="status"]:checked')?.value || '';
-                const advisorInfo = document.getElementById('advisorInfo').value.trim();
-                const statusOther = document.getElementById('statusOther').value.trim();
+                const advisorInfoEl = document.getElementById('advisorInfo');
+                const statusOtherEl = document.getElementById('statusOther');
+                const advisorInfo = advisorInfoEl.value.trim();
+                const statusOther = statusOtherEl.value.trim();
 
-                if (!fullName || !organization || !phone || !email) {
-                    return showFormError('กรุณากรอกข้อมูลผู้ขอรับบริการ (ชื่อ-นามสกุล, หน่วยงาน, เบอร์โทร และอีเมล) ให้ครบถ้วน');
-                }
+                if (!fullName) return showFormError('กรุณากรอกชื่อ - นามสกุล', fullNameEl);
+                if (!organization) return showFormError('กรุณากรอกหน่วยงาน / บริษัท / มหาวิทยาลัย', organizationEl);
+                if (!phone) return showFormError('กรุณากรอกเบอร์โทรศัพท์', phoneEl);
+                if (!email) return showFormError('กรุณากรอกอีเมล', emailEl);
                 if (!status) {
-                    return showFormError('กรุณาเลือกสถานะ (Status) ของผู้ขอรับบริการ');
+                    return showFormError('กรุณาเลือกสถานะ (Status) ของผู้ขอรับบริการ', document.getElementById('status-radio-group'));
                 }
                 if (status === 'นักศึกษาปริญญาตรี' && !advisorInfo) {
-                    return showFormError('กรุณากรอกข้อมูลอาจารย์ที่ปรึกษาสำหรับนักศึกษาปริญญาตรี');
+                    return showFormError('กรุณากรอกข้อมูลอาจารย์ที่ปรึกษาสำหรับนักศึกษาปริญญาตรี', advisorInfoEl);
                 }
                 if (status === 'อื่นๆ' && !statusOther) {
-                    return showFormError('กรุณาระบุข้อมูลสถานะเพิ่มเติม');
+                    return showFormError('กรุณาระบุข้อมูลสถานะเพิ่มเติม', statusOtherEl);
                 }
 
                 // 3. ข้อมูลเอกสาร ใบเสร็จ ใบรายงานผล การจัดส่ง
-                const receiptName = document.getElementById('receiptName').value.trim();
+                const receiptNameEl = document.getElementById('receiptName');
+                const receiptAddressEl = document.getElementById('receiptAddress');
+                const reportNameEl = document.getElementById('reportName');
+                const reportAddressEl = document.getElementById('reportAddress');
+                const shippingNameEl = document.getElementById('shippingName');
+                const shippingAddressEl = document.getElementById('shippingAddress');
+
+                const receiptName = receiptNameEl.value.trim();
                 const receiptTaxId = document.getElementById('receiptTaxId').value.trim();
-                const receiptAddress = document.getElementById('receiptAddress').value.trim();
-                const reportName = document.getElementById('reportName').value.trim();
-                const reportAddress = document.getElementById('reportAddress').value.trim();
-                const shippingName = document.getElementById('shippingName').value.trim();
-                const shippingAddress = document.getElementById('shippingAddress').value.trim();
+                const receiptAddress = receiptAddressEl.value.trim();
+                const reportName = reportNameEl.value.trim();
+                const reportAddress = reportAddressEl.value.trim();
+                const shippingName = shippingNameEl.value.trim();
+                const shippingAddress = shippingAddressEl.value.trim();
                 const docDelivery = Array.from(document.querySelectorAll('input[name="docDelivery"]:checked')).map(c => c.value);
 
-                if (!receiptName || !receiptAddress) {
-                    return showFormError('กรุณากรอกชื่อและที่อยู่สำหรับออกใบเสร็จรับเงินให้ครบถ้วน');
-                }
-                if (!reportName || !reportAddress) {
-                    return showFormError('กรุณากรอกชื่อและที่อยู่สำหรับใบรายงานผลให้ครบถ้วน');
-                }
-                if (!shippingName || !shippingAddress) {
-                    return showFormError('กรุณากรอกชื่อและที่อยู่จัดส่งให้ครบถ้วน');
-                }
+                if (!receiptName) return showFormError('กรุณากรอกชื่อสำหรับออกใบเสร็จรับเงิน', receiptNameEl);
+                if (!receiptAddress) return showFormError('กรุณากรอกที่อยู่สำหรับออกใบเสร็จรับเงิน', receiptAddressEl);
+                if (!reportName) return showFormError('กรุณากรอกชื่อสำหรับใบรายงานผล', reportNameEl);
+                if (!reportAddress) return showFormError('กรุณากรอกที่อยู่สำหรับใบรายงานผล', reportAddressEl);
+                if (!shippingName) return showFormError('กรุณากรอกชื่อผู้รับจัดส่ง', shippingNameEl);
+                if (!shippingAddress) return showFormError('กรุณากรอกที่อยู่จัดส่ง', shippingAddressEl);
                 if (docDelivery.length === 0) {
-                    return showFormError('กรุณาเลือกวิธีการรับเอกสาร (ด้วยตนเอง หรือ ทางไปรษณีย์)');
+                    return showFormError('กรุณาเลือกวิธีการรับเอกสาร (ด้วยตนเอง หรือ ทางไปรษณีย์)', document.getElementById('doc-delivery-group'));
                 }
 
                 // 4. ข้อมูลตัวอย่าง สภาวะทดสอบ การรับคืน และความเป็นอันตราย
-                const sampleCount = parseInt(document.getElementById('sampleCount').value, 10);
-                const sampleType = document.getElementById('sampleType').value;
+                const sampleCountEl = document.getElementById('sampleCount');
+                const sampleTypeEl = document.getElementById('sampleType');
+                const sampleCount = parseInt(sampleCountEl.value, 10);
+                const sampleType = sampleTypeEl.value;
                 const testCondition = document.getElementById('testCondition').value.trim();
                 const sampleDisposition = document.querySelector('input[name="sampleDisposition"]:checked')?.value || '';
 
                 if (!sampleCount || sampleCount < 1) {
-                    return showFormError('กรุณาระบุจำนวนตัวอย่างอย่างน้อย 1 ตัวอย่าง');
+                    return showFormError('กรุณาระบุจำนวนตัวอย่างอย่างน้อย 1 ตัวอย่าง', sampleCountEl);
                 }
                 if (!sampleType) {
-                    return showFormError('กรุณาเลือกลักษณะของตัวอย่าง');
+                    return showFormError('กรุณาเลือกลักษณะของตัวอย่าง', sampleTypeEl);
                 }
 
-                const samples = Array.from(document.querySelectorAll('#dynamic-samples-container .sample-row')).map((row, idx) => ({
-                    index: idx + 1,
-                    name: row.querySelector('.sample-name-input')?.value.trim() || '',
-                    storage: row.querySelector('.sample-storage-select')?.value || 'อุณหภูมิห้อง'
-                }));
+                const sampleRowEls = Array.from(document.querySelectorAll('#dynamic-samples-container .sample-row'));
+                const samples = sampleRowEls.map((row, idx) => {
+                    const inputEl = row.querySelector('.sample-name-input');
+                    return {
+                        index: idx + 1,
+                        name: inputEl?.value.trim() || '',
+                        storage: row.querySelector('.sample-storage-select')?.value || 'อุณหภูมิห้อง',
+                        inputEl
+                    };
+                });
 
                 const missingSample = samples.find(s => !s.name);
                 if (missingSample) {
-                    return showFormError(`กรุณากรอกชื่อของตัวอย่างที่ ${missingSample.index}`);
+                    return showFormError(`กรุณากรอกชื่อของตัวอย่างที่ ${missingSample.index}`, missingSample.inputEl);
                 }
 
                 if (!sampleDisposition) {
-                    return showFormError('กรุณาเลือกการรับคืนตัวอย่าง (รับคืน หรือ ไม่รับคืน)');
+                    return showFormError('กรุณาเลือกการรับคืนตัวอย่าง (รับคืน หรือ ไม่รับคืน)', document.getElementById('sample-disposition-group'));
                 }
 
                 const hazardous = Array.from(document.querySelectorAll('input[name="hazardous"]:checked')).map(cb => {
@@ -2262,7 +2284,7 @@
                     docDelivery,
                     sampleCount,
                     sampleType,
-                    samples,
+                    samples: samples.map(({ index, name, storage }) => ({ index, name, storage })),
                     testCondition,
                     sampleDisposition,
                     hazardous
@@ -2289,10 +2311,29 @@
             }
         });
 
-        function showFormError(msg) {
+        function showFormError(msg, targetEl = null) {
             errorText.textContent = msg;
             errorBanner.classList.remove('hidden');
-            errorBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            showToast(msg, 'error');
+
+            // ล้างกรอบสีแดงเก่าออกก่อน
+            document.querySelectorAll('.field-validation-highlight').forEach(el => {
+                el.classList.remove('field-validation-highlight', 'ring-2', 'ring-rose-500', 'border-rose-500');
+            });
+
+            if (targetEl) {
+                // เลื่อนหน้าจอให้ช่องที่ลืมกรอกมาอยู่กลางจอ + ตีกรอบสีแดง + เคอร์เซอร์กระพริบพร้อมพิมพ์
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                targetEl.classList.add('field-validation-highlight', 'ring-2', 'ring-rose-500', 'border-rose-500');
+                if (typeof targetEl.focus === 'function' && ['INPUT', 'SELECT', 'TEXTAREA'].includes(targetEl.tagName)) {
+                    setTimeout(() => targetEl.focus({ preventScroll: true }), 250);
+                }
+                setTimeout(() => {
+                    targetEl.classList.remove('field-validation-highlight', 'ring-2', 'ring-rose-500', 'border-rose-500');
+                }, 4000);
+            } else {
+                errorBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function resetTestingForm() {
@@ -2436,12 +2477,12 @@
                 if (refreshBtn) refreshBtn.classList.remove('hidden');
 
                 desktopSlot.innerHTML = `
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2.5 shrink-0">
                         <div class="text-right leading-tight">
-                            <span class="block text-xs font-heading font-bold text-navy-900 max-w-[130px] truncate">${escapeHtml(currentUser.name)}</span>
-                            <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-heading font-bold border ${badgeClass}">${roleLabel}</span>
+                            <span class="block text-xs font-heading font-bold text-navy-900 max-w-[120px] truncate" title="${escapeHtml(currentUser.name)}">${escapeHtml(currentUser.name)}</span>
+                            <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-heading font-bold border whitespace-nowrap ${badgeClass}">${roleLabel}</span>
                         </div>
-                        <button type="button" onclick="logoutUser()" title="ออกจากระบบ" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-600 font-heading text-xs font-semibold transition-colors">
+                        <button type="button" onclick="logoutUser()" title="ออกจากระบบ" class="whitespace-nowrap shrink-0 px-3 py-2 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-600 font-heading text-xs font-semibold transition-colors">
                             ออกจากระบบ
                         </button>
                     </div>
@@ -2919,6 +2960,29 @@
             }
         }
 
+        function renderSelectedUploadFiles() {
+            const fileInput = document.getElementById('upload-result-file');
+            const listEl = document.getElementById('selected-upload-files-list');
+            const files = Array.from(fileInput.files || []);
+            if (files.length === 0) {
+                listEl.classList.add('hidden');
+                listEl.innerHTML = '';
+                return;
+            }
+            listEl.classList.remove('hidden');
+            listEl.innerHTML = `
+                <p class="font-heading font-semibold text-navy-900">เลือกแล้ว ${files.length} ไฟล์:</p>
+                <ul class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1 max-h-32 overflow-y-auto">
+                    ${files.map((f, i) => `
+                        <li class="flex items-center justify-between gap-2">
+                            <span class="truncate">${i + 1}. ${escapeHtml(f.name)}</span>
+                            <span class="text-slate-400 shrink-0">${(f.size / 1024).toFixed(1)} KB</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+        }
+
         function openResultUploadModal(jobCode) {
             if (!currentUser || currentUser.role !== 'admin') return;
             const rec = requestsCache.find(r => r.jobCode === jobCode);
@@ -2929,6 +2993,7 @@
             document.getElementById('upload-job-instrument-input').value = rec.instrument;
             document.getElementById('upload-result-note').value = rec.resultNote || '';
             document.getElementById('upload-result-file').value = '';
+            renderSelectedUploadFiles();
 
             const infoEl = document.getElementById('current-attached-file-info');
             if (rec.resultFile && rec.resultFile.name) {
@@ -2962,45 +3027,54 @@
             const note = document.getElementById('upload-result-note').value.trim();
             const fileInput = document.getElementById('upload-result-file');
             const autoAdvance = document.getElementById('auto-advance-status-chk').checked;
-            const file = fileInput.files && fileInput.files[0];
+            const files = Array.from(fileInput.files || []);
             const submitBtn = document.getElementById('upload-result-submit-btn');
 
             const existing = requestsCache.find(r => r.jobCode === jobCode);
-            if (!file && !note && !(existing && existing.resultFile && existing.resultFile.url)) {
+            if (files.length === 0 && !note && !(existing && existing.resultFile && existing.resultFile.url)) {
                 showToast('กรุณาพิมพ์ข้อความสรุปผลหรือเลือกไฟล์อย่างน้อย 1 อย่าง', 'error');
                 return;
             }
 
+            // ตรวจสอบขนาดไฟล์ทุกไฟล์ (ไม่เกินไฟล์ละ 5MB)
+            const maxBytes = 5 * 1024 * 1024;
+            const oversizedFile = files.find(f => f.size > maxBytes);
+            if (oversizedFile) {
+                showToast(`ไฟล์ "${oversizedFile.name}" มีขนาดใหญ่เกิน 5MB กรุณาเลือกไฟล์ที่เล็กกว่านี้`, 'error');
+                return;
+            }
+
             submitBtn.disabled = true;
-            submitBtn.textContent = 'กำลังอัปโหลดและบันทึก...';
+            submitBtn.textContent = files.length > 0 ? `กำลังเตรียมอัปโหลด ${files.length} ไฟล์...` : 'กำลังบันทึก...';
 
             try {
-                let filePayload = null;
-                if (file) {
-                    const maxBytes = 5 * 1024 * 1024; // 5MB
-                    if (file.size > maxBytes) {
-                        throw new Error('ไฟล์มีขนาดใหญ่เกิน 5MB กรุณาเลือกไฟล์ที่เล็กกว่านี้');
-                    }
+                // วนลูปแปลงไฟล์ทั้งหมดที่เลือกเป็นข้อมูลสำหรับส่งขึ้น Google Drive
+                const filePayloads = [];
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    submitBtn.textContent = `กำลังอ่านไฟล์ที่ ${i + 1}/${files.length}...`;
                     const base64Data = await new Promise((resolve, reject) => {
                         const reader = new FileReader();
                         reader.onload = () => resolve(String(reader.result).split(',')[1]);
-                        reader.onerror = () => reject(new Error('เกิดข้อผิดพลาดในการอ่านไฟล์'));
+                        reader.onerror = () => reject(new Error(`เกิดข้อผิดพลาดในการอ่านไฟล์ ${file.name}`));
                         reader.readAsDataURL(file);
                     });
-                    filePayload = {
+                    filePayloads.push({
                         fileName: file.name,
                         mimeType: file.type || 'application/octet-stream',
                         base64Data
-                    };
+                    });
                 }
 
+                submitBtn.textContent = 'กำลังส่งข้อมูลขึ้น Google Drive...';
                 const res = await callGasApi('uploadResult', {
                     adminEmail: currentUser.email,
                     jobCode,
                     instrument,
                     resultNote: note,
                     autoAdvance,
-                    file: filePayload
+                    file: filePayloads[0] || null,
+                    files: filePayloads
                 });
 
                 if (existing) {
@@ -3011,7 +3085,7 @@
 
                 closeResultUploadModal();
                 renderHistorySection();
-                showToast(`บันทึกและส่งผลวิเคราะห์สำหรับงาน ${jobCode} เรียบร้อยแล้ว`, 'success');
+                showToast(`บันทึกและส่งผลวิเคราะห์ (${files.length > 0 ? files.length + ' ไฟล์' : 'ข้อความ'}) สำหรับงาน ${jobCode} เรียบร้อยแล้ว`, 'success');
             } catch (err) {
                 showToast(err.message || 'ไม่สามารถอัปโหลดผลวิเคราะห์ได้', 'error');
             } finally {
