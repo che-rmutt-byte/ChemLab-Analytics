@@ -1402,20 +1402,20 @@
                 </div>
 
                 <div class="space-y-3">
-                    <!-- แสดงรายการไฟล์เดิมที่เคยอัปโหลดไว้ (กดลบรายไฟล์ได้) -->
+                    <!-- ส่วนที่ 1: แสดงไฟล์เดิมที่เคยอัปโหลดไว้ก่อนหน้า (กดลบทีละไฟล์ได้) -->
                     <div id="existing-attached-files-wrap" class="hidden space-y-1.5">
-                        <label class="block text-xs font-heading font-semibold text-navy-900">ไฟล์ผลวิเคราะห์ที่แนบไว้แล้ว (กดปุ่มลบเพื่อเอาไฟล์เดิมออก):</label>
+                        <label class="block text-xs font-heading font-semibold text-navy-900">ไฟล์ผลวิเคราะห์ที่แนบไว้ก่อนหน้า (กดปุ่มลบเพื่อเอาไฟล์เดิมออก):</label>
                         <div id="existing-attached-files-list" class="space-y-1.5 max-h-36 overflow-y-auto"></div>
                     </div>
 
-                    <!-- ปุ่มเพิ่มไฟล์ใหม่ -->
+                    <!-- ส่วนที่ 2: ปุ่มเลือกเพิ่มไฟล์ใหม่ -->
                     <div>
                         <label for="upload-result-file" class="block text-sm font-medium text-slate-700 mb-1.5">
                             เพิ่มไฟล์ผลวิเคราะห์ขึ้น Google Drive <span class="text-mint-700 font-semibold">(เลือกได้หลายไฟล์ / หลากหลายนามสกุล สูงสุดไฟล์ละ 5MB)</span>
                         </label>
                         <input type="file" id="upload-result-file" multiple onchange="handleSelectUploadFiles(this)"
                             class="w-full text-sm text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-heading file:font-semibold file:bg-mint-50 file:text-mint-700 hover:file:bg-mint-100 border border-slate-200 rounded-xl p-2">
-                        <!-- แสดงรายการไฟล์ใหม่ที่กำลังจะอัปโหลด (กดยกเลิกทีละไฟล์ได้) -->
+                        <!-- แสดงรายการไฟล์ใหม่ที่เพิ่งเลือก (กดยกเลิกทีละไฟล์ได้) -->
                         <div id="selected-upload-files-list" class="mt-2 space-y-1 text-xs text-slate-600 hidden"></div>
                     </div>
                 </div>
@@ -3002,23 +3002,71 @@
             }
         }
 
+        let pendingUploadFiles = []; // เก็บไฟล์ใหม่ที่แอดมินเลือก (กดยกเลิกทีละไฟล์ได้)
+        let keptExistingFiles = [];  // เก็บไฟล์เดิมที่ยังไม่ถูกลบ { name, viewUrl }
+
+        function handleSelectUploadFiles(inputEl) {
+            const newFiles = Array.from(inputEl.files || []);
+            if (newFiles.length > 0) {
+                pendingUploadFiles.push(...newFiles);
+            }
+            inputEl.value = ''; // ล้าง input เพื่อให้กดเลือกเพิ่มไฟล์จากโฟลเดอร์อื่นซ้ำได้อีก
+            renderSelectedUploadFiles();
+        }
+
+        function removePendingUploadFile(index) {
+            pendingUploadFiles.splice(index, 1);
+            renderSelectedUploadFiles();
+        }
+
+        function removeExistingAttachedFile(index) {
+            keptExistingFiles.splice(index, 1);
+            renderExistingAttachedFiles();
+        }
+
+        function renderExistingAttachedFiles() {
+            const wrap = document.getElementById('existing-attached-files-wrap');
+            const listEl = document.getElementById('existing-attached-files-list');
+            if (keptExistingFiles.length === 0) {
+                wrap.classList.add('hidden');
+                listEl.innerHTML = '';
+                return;
+            }
+            wrap.classList.remove('hidden');
+            listEl.innerHTML = keptExistingFiles.map((f, i) => `
+                <div class="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-mint-50/80 border border-mint-200 text-xs">
+                    <a href="${escapeHtml(f.viewUrl)}" target="_blank" rel="noopener noreferrer" class="font-medium text-mint-800 hover:underline truncate">
+                        ${i + 1}. ${escapeHtml(f.name)}
+                    </a>
+                    <button type="button" onclick="removeExistingAttachedFile(${i})" title="ลบไฟล์เดิมนี้ออก"
+                        class="px-2.5 py-1 rounded-lg bg-rose-100 hover:bg-rose-600 text-rose-700 hover:text-white font-heading font-semibold shrink-0 transition-colors">
+                        ลบไฟล์
+                    </button>
+                </div>
+            `).join('');
+        }
+
         function renderSelectedUploadFiles() {
-            const fileInput = document.getElementById('upload-result-file');
             const listEl = document.getElementById('selected-upload-files-list');
-            const files = Array.from(fileInput.files || []);
-            if (files.length === 0) {
+            if (pendingUploadFiles.length === 0) {
                 listEl.classList.add('hidden');
                 listEl.innerHTML = '';
                 return;
             }
             listEl.classList.remove('hidden');
             listEl.innerHTML = `
-                <p class="font-heading font-semibold text-navy-900">เลือกแล้ว ${files.length} ไฟล์:</p>
-                <ul class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1 max-h-32 overflow-y-auto">
-                    ${files.map((f, i) => `
-                        <li class="flex items-center justify-between gap-2">
-                            <span class="truncate">${i + 1}. ${escapeHtml(f.name)}</span>
-                            <span class="text-slate-400 shrink-0">${(f.size / 1024).toFixed(1)} KB</span>
+                <p class="font-heading font-semibold text-navy-900">ไฟล์ใหม่ที่เตรียมอัปโหลด (${pendingUploadFiles.length} ไฟล์):</p>
+                <ul class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-1.5 max-h-36 overflow-y-auto">
+                    ${pendingUploadFiles.map((f, i) => `
+                        <li class="flex items-center justify-between gap-2 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200">
+                            <div class="min-w-0 flex-1">
+                                <span class="block truncate font-medium text-slate-800">${i + 1}. ${escapeHtml(f.name)}</span>
+                                <span class="text-[11px] text-slate-400">${(f.size / 1024).toFixed(1)} KB</span>
+                            </div>
+                            <button type="button" onclick="removePendingUploadFile(${i})" title="ยกเลิกไฟล์นี้"
+                                class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 font-heading font-semibold shrink-0 transition-colors">
+                                ยกเลิก
+                            </button>
                         </li>
                     `).join('')}
                 </ul>
@@ -3035,15 +3083,12 @@
             document.getElementById('upload-job-instrument-input').value = rec.instrument;
             document.getElementById('upload-result-note').value = rec.resultNote || '';
             document.getElementById('upload-result-file').value = '';
-            renderSelectedUploadFiles();
 
-            const infoEl = document.getElementById('current-attached-file-info');
-            if (rec.resultFile && rec.resultFile.name) {
-                infoEl.textContent = `ไฟล์เดิมที่แนบไว้: ${rec.resultFile.name} (เลือกไฟล์ใหม่หากต้องการเปลี่ยน)`;
-                infoEl.classList.remove('hidden');
-            } else {
-                infoEl.classList.add('hidden');
-            }
+            // รีเซ็ตไฟล์ใหม่ และดึงรายการไฟล์เดิมมาแสดงเพื่อให้กดลบรายไฟล์ได้
+            pendingUploadFiles = [];
+            keptExistingFiles = parseResultFiles(rec);
+            renderExistingAttachedFiles();
+            renderSelectedUploadFiles();
 
             resultUploadModal.classList.remove('hidden');
             resultUploadModal.classList.add('flex');
@@ -3067,18 +3112,16 @@
             const jobCode = document.getElementById('upload-job-code-input').value;
             const instrument = document.getElementById('upload-job-instrument-input').value;
             const note = document.getElementById('upload-result-note').value.trim();
-            const fileInput = document.getElementById('upload-result-file');
             const autoAdvance = document.getElementById('auto-advance-status-chk').checked;
-            const files = Array.from(fileInput.files || []);
+            const files = pendingUploadFiles;
             const submitBtn = document.getElementById('upload-result-submit-btn');
 
             const existing = requestsCache.find(r => r.jobCode === jobCode);
-            if (files.length === 0 && !note && !(existing && existing.resultFile && existing.resultFile.url)) {
+            if (files.length === 0 && keptExistingFiles.length === 0 && !note) {
                 showToast('กรุณาพิมพ์ข้อความสรุปผลหรือเลือกไฟล์อย่างน้อย 1 อย่าง', 'error');
                 return;
             }
 
-            // ตรวจสอบขนาดไฟล์ทุกไฟล์ (ไม่เกินไฟล์ละ 5MB)
             const maxBytes = 5 * 1024 * 1024;
             const oversizedFile = files.find(f => f.size > maxBytes);
             if (oversizedFile) {
@@ -3090,7 +3133,6 @@
             submitBtn.textContent = files.length > 0 ? `กำลังเตรียมอัปโหลด ${files.length} ไฟล์...` : 'กำลังบันทึก...';
 
             try {
-                // วนลูปแปลงไฟล์ทั้งหมดที่เลือกเป็นข้อมูลสำหรับส่งขึ้น Google Drive
                 const filePayloads = [];
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
@@ -3108,26 +3150,26 @@
                     });
                 }
 
-                submitBtn.textContent = 'กำลังส่งข้อมูลขึ้น Google Drive...';
+                submitBtn.textContent = 'กำลังบันทึกข้อมูล...';
                 const res = await callGasApi('uploadResult', {
                     adminEmail: currentUser.email,
                     jobCode,
                     instrument,
                     resultNote: note,
                     autoAdvance,
-                    file: filePayloads[0] || null,
+                    keptFiles: keptExistingFiles.map(f => ({ name: f.name, url: f.viewUrl })),
                     files: filePayloads
                 });
 
                 if (existing) {
                     existing.resultNote = res.resultNote;
-                    if (res.resultFile) existing.resultFile = res.resultFile;
+                    existing.resultFile = res.resultFile || null;
                     if (res.statusStep) existing.statusStep = res.statusStep;
                 }
 
                 closeResultUploadModal();
                 renderHistorySection();
-                showToast(`บันทึกและส่งผลวิเคราะห์ (${files.length > 0 ? files.length + ' ไฟล์' : 'ข้อความ'}) สำหรับงาน ${jobCode} เรียบร้อยแล้ว`, 'success');
+                showToast(`บันทึกข้อมูลผลวิเคราะห์สำหรับงาน ${jobCode} เรียบร้อยแล้ว`, 'success');
             } catch (err) {
                 showToast(err.message || 'ไม่สามารถอัปโหลดผลวิเคราะห์ได้', 'error');
             } finally {
@@ -3294,13 +3336,80 @@
             showToast(`ดาวน์โหลดเอกสารใบคำขอ ${rec.jobCode} แล้ว`, 'success');
         }
 
+        // ฟังก์ชันช่วยแยกชื่อไฟล์และลิงก์ Google Drive ออกมาเป็นรายการ
+        function parseResultFiles(rec) {
+            if (!rec || !rec.resultFile || !rec.resultFile.url) return [];
+            const names = String(rec.resultFile.name || '').split(/\s*\|\s*/).filter(Boolean);
+            const urls = String(rec.resultFile.url || '').split(/\s*\|\s*/).filter(Boolean);
+            return urls.map((url, idx) => {
+                // แปลงลิงก์ Google Drive ให้เป็นลิงก์ดาวน์โหลดไฟล์ทันที
+                const driveMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                const directDownloadUrl = driveMatch
+                    ? `https://drive.google.com/uc?export=download&id=${driveMatch[1]}`
+                    : url;
+                return {
+                    name: names[idx] || `ไฟล์ผลวิเคราะห์_${idx + 1}`,
+                    viewUrl: url,
+                    downloadUrl: directDownloadUrl
+                };
+            });
+        }
+
+        const resultFilesModal = document.getElementById('result-files-modal');
+
+        function closeResultFilesModal() {
+            resultFilesModal.classList.add('hidden');
+            resultFilesModal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        resultFilesModal.addEventListener('click', (e) => {
+            if (e.target === resultFilesModal) closeResultFilesModal();
+        });
+
         function downloadAnalysisResult(jobCode) {
             const rec = requestsCache.find(r => r.jobCode === jobCode);
             if (!rec) return;
 
-            if (rec.resultFile && rec.resultFile.url) {
-                window.open(rec.resultFile.url, '_blank', 'noopener,noreferrer');
-                showToast(`กำลังเปิดไฟล์ผลวิเคราะห์ ${rec.resultFile.name || rec.jobCode}`, 'success');
+            const files = parseResultFiles(rec);
+
+            if (files.length > 0) {
+                document.getElementById('result-files-job-code').textContent = rec.jobCode;
+                const listBody = document.getElementById('result-files-list-body');
+
+                listBody.innerHTML = files.map((f, idx) => `
+                    <div class="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-mint-400 transition-colors">
+                        <div class="min-w-0 flex-1">
+                            <p class="font-heading font-semibold text-sm text-navy-900 truncate" title="${escapeHtml(f.name)}">
+                                ${idx + 1}. ${escapeHtml(f.name)}
+                            </p>
+                            <a href="${escapeHtml(f.viewUrl)}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-500 hover:text-mint-700 underline">
+                                เปิดดูตัวอย่างไฟล์ใน Google Drive
+                            </a>
+                        </div>
+                        <a href="${escapeHtml(f.downloadUrl)}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-heading text-xs font-semibold shrink-0 shadow-sm transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            ดาวน์โหลด
+                        </a>
+                    </div>
+                `).join('');
+
+                // ตั้งค่าปุ่ม "ดาวน์โหลดทั้งหมด"
+                document.getElementById('download-all-results-btn').onclick = () => {
+                    files.forEach((f, idx) => {
+                        setTimeout(() => {
+                            window.open(f.downloadUrl, '_blank', 'noopener,noreferrer');
+                        }, idx * 450); // หน่วง 0.45 วินาทีต่อไฟล์เพื่อไม่ให้เบราว์เซอร์บล็อก Pop-up
+                    });
+                    showToast(`กำลังเริ่มดาวน์โหลดทั้งหมด ${files.length} ไฟล์`, 'success');
+                };
+
+                resultFilesModal.classList.remove('hidden');
+                resultFilesModal.classList.add('flex');
+                document.body.classList.add('overflow-hidden');
             } else if (rec.resultNote && rec.resultNote.trim()) {
                 const content = `รายงานสรุปผลการวิเคราะห์ - รหัสงาน ${rec.jobCode}\nเครื่องมือ: ${rec.instrument}\nผู้ขอรับบริการ: ${rec.fullName}\n--------------------------------------------\n${rec.resultNote}\n`;
                 const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
